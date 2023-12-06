@@ -1,13 +1,11 @@
 import React from 'react'
-import io from 'socket.io-client'
-const endpoint="http://localhost:5000"
-const socket = io(endpoint, { transports: ["websocket"] });
+import Home from './Components/Home/Home'
 const page = () => {
- socket.on("connection",()=>{
-  console.log("connect");
- })
+
   return (
-    <div>page</div>
+    <div>
+      <Home/>
+    </div>
   )
 }
 
