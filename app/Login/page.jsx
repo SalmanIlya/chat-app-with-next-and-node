@@ -8,10 +8,12 @@ import { getUser } from "../Store/User";
 const page = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [link, setlink] = useState("")
   const dispatch=useDispatch()
 const LoginHandler=async()=>{
 axios.post("http://localhost:5000/api/user/login",{Email,Password}).then((res)=>{
     dispatch(getUser(res.data))
+    setlink("/")
 }).catch((err)=>{
     console.log(err);
 })
@@ -28,7 +30,7 @@ axios.post("http://localhost:5000/api/user/login",{Email,Password}).then((res)=>
               <div className="space-y-4 md:space-y-6">
                 <div>
                   <label
-                    for="email"
+                    htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Your email
@@ -48,7 +50,7 @@ axios.post("http://localhost:5000/api/user/login",{Email,Password}).then((res)=>
                 </div>
                 <div>
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Password
@@ -66,7 +68,9 @@ axios.post("http://localhost:5000/api/user/login",{Email,Password}).then((res)=>
                 </div>
 
                 <button onClick={()=>{LoginHandler()}} className="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                  <Link href={link}>
                   Sign in
+                  </Link> 
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet?{" "}
