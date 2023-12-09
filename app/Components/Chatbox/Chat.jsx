@@ -1,33 +1,61 @@
 import React, { useEffect, useState } from 'react'
 import { IoMdCall,IoIosVideocam  } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
-import SocketIo, { Socket } from 'socket.io-client'
+import SocketIo from 'socket.io-client'
 import "./Style.css"
 import { useSelector } from 'react-redux';
 const endpoint='http://localhost:5000';
-let io;
+let Socket;
 const Chat = () => {
   const [message, setmessage] = useState("")
   const [messages, setmessages] = useState([])
+  const [id, setid] = useState("")
+  console.log(messages);
+  // console.log(id);
     const User=useSelector((state)=>state.User.User)
     const send=()=>{
- io.emit("message",{message})
+ Socket.emit("message",{id,message})
  setmessage("")
        }
+  
     useEffect(() => {
-       io=SocketIo(endpoint,{transports:["websocket"]})
-      io.on("connect",()=>{
-        console.log("Connected");
+       Socket=SocketIo(endpoint,{transports:["websocket"]})
+      Socket.on("connect",()=>{
+        alert("Connected");
+        setid(Socket.id)
+  
       })
-      io.emit("joined",{User})
-      io.emit("disconnected")
+      Socket.emit("joined",{User})
+   
+
+
+      Socket.on("wellcome",(data)=>{
+        console.log(data);
+      })
+      Socket.on("userJoin",(data)=>{
+        console.log(data.message);
+      })
+      Socket.on("Leave",(data)=>{
+console.log(data);
+      })
+     
     return  ()=>{
  
       
-      io.off()
+      Socket.emit("disconnected")
+      Socket.off()
     }
     }, [])
-   
+   useEffect(()=>{
+    Socket.on("sendmessage",(data)=>{
+   setmessages((oldmassages)=>[...oldmassages,data])
+
+   return ()=>{
+    Socket.off()
+    // Socket.emit("disconnected")
+   }
+    })
+   },[])
     
   return (
     <div>
