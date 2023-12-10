@@ -19,8 +19,9 @@ const page = () => {
         .post("http://localhost:5000/api/user/login", { Email, Password })
         .then((res) => {
           setlink("/");
-
           dispatch(getUser(res.data));
+          setEmail("")
+          setPassword("")
 
           toast.success("Login Successfully please wait a few second");
         })

@@ -3,43 +3,52 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { getUser } from "../Store/User";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+
 const page = () => {
   const dispatch = useDispatch();
   const [UserName, setUserName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [link, setLink] = useState("");
+  const [lin, setlin] = useState("")
+const user=useSelector((state)=>state.User.User)
   const userdata = {
     UserName,
     Email,
     Password,
   };
+  
   const registerUser = async () => {
+
     if (!UserName && !Email && !Password) {
       toast.error(" all fields are required");
     } else {
-      if(Password.length<8){
+      if (Password.length < 8) {
         toast.error(" password must be 8 Characters");
-      }else{
-
-      await axios
-        .post("http://localhost:5000/api/user/create", userdata)
-        .then((res) => {
-          dispatch(getUser(res.data));
-          setLink("/");
-        })
-        .catch((err) => {
-          toast.error(err.message);
-        });
-    }}
+      } else {
+        await axios
+          .post("http://localhost:5000/api/user/create", userdata)
+          .then((res) => {
+            dispatch(getUser(res.data));
+           
+            setEmail("");
+            setPassword("");
+            setUserName("");
+            toast.success("user Created Successfully");
+setlin("/")
+          })
+          .catch((err) => {
+            toast.error(err.message);
+          });
+      }
+    }
   };
 
   return (
     <div>
-      <ToastContainer/>
+      <ToastContainer />
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -90,7 +99,7 @@ const page = () => {
                 </div>
                 <div>
                   <label
-                  htmlFor="password"
+                    htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Password
@@ -108,15 +117,14 @@ const page = () => {
                     required=""
                   />
                 </div>
-
-                <button
-                  onClick={() => {
-                    registerUser();
-                  }}
-                  className="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  <Link href={link}>Sign up</Link>
-                </button>
+                <Link href={lin}>
+                  <button
+                    onClick={registerUser}
+                    className="w-full mt-5 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  >
+                    Sign up
+                  </button>
+                </Link>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet?{" "}
                   <button className="font-medium text-primary-600 hover:underline dark:text-primary-500">
