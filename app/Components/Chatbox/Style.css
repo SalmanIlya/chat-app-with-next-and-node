@@ -6,9 +6,21 @@
 .top{
     background: linear-gradient(#05BDCE,#5F4FE0,#5C3FEC);
 }
+
+
+.chatbox{
+   height: 350px !important;
+   width: 100%;
+}
+.box{
+    display: inline-block !important;
+
+}
+
 .btn{
     background-color: #5D46E7;
     color: white;
+    
 }
 .icon{
     transition: 0.5s all ease-in;
