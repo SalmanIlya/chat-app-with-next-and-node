@@ -6,10 +6,11 @@ import { useDispatch } from "react-redux";
 import { getUser } from "../Store/User";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 const page = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [link, setlink] = useState("");
+  const Routes=useRouter()
   const dispatch = useDispatch();
   const LoginHandler = async () => {
     if (!Email && !Password) {
@@ -18,7 +19,7 @@ const page = () => {
       axios
         .post("http://localhost:5000/api/user/login", { Email, Password })
         .then((res) => {
-          setlink("/");
+          Routes.push("/")
           dispatch(getUser(res.data));
           setEmail("")
           setPassword("")
@@ -81,7 +82,7 @@ const page = () => {
                     required=""
                   />
                 </div>
-                <Link href={link}>
+                
                   <button
                     onClick={() => {
                       LoginHandler();
@@ -90,7 +91,7 @@ const page = () => {
                   >
                     Sign in
                   </button>
-                </Link>
+                
 
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet?{" "}
