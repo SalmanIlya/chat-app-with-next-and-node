@@ -88,7 +88,7 @@ const Chat = () => {
         )}
 
         {/* bottom  */}
-        <div className="w-full  flex flex-row h-12  ">
+        <div className="w-full  flex flex-row h-12  bottom ">
           <input
             type="text"
             value={message}
