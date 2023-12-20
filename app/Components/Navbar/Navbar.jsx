@@ -33,7 +33,7 @@ const Navbar = () => {
               </Link>
             </div>
           ) : (
-            <div>
+            <div className="nav flex flex-row justify-center items-center text-xs  md:text-base lg:text-base 2xl:text-base xl:text-base sm:text-base">
               <Link href={"/"} className="mx-3 hover:underline">
                 Home
               </Link>
