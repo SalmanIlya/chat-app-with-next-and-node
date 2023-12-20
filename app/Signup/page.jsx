@@ -6,13 +6,14 @@ import { getUser } from "../Store/User";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const dispatch = useDispatch();
   const [UserName, setUserName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [lin, setlin] = useState("")
+  const Routes=useRouter()
 const user=useSelector((state)=>state.User.User)
   const userdata = {
     UserName,
@@ -37,7 +38,7 @@ const user=useSelector((state)=>state.User.User)
             setPassword("");
             setUserName("");
             toast.success("user Created Successfully");
-setlin("/")
+Routes.push("/")
           })
           .catch((err) => {
             toast.error(err.message);
@@ -117,14 +118,14 @@ setlin("/")
                     required=""
                   />
                 </div>
-                <Link href={lin}>
+            
                   <button
                     onClick={registerUser}
                     className="w-full mt-5 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                   >
                     Sign up
                   </button>
-                </Link>
+              
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet?{" "}
                   <button className="font-medium text-primary-600 hover:underline dark:text-primary-500">
