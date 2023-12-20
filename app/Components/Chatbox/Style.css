@@ -1,16 +1,24 @@
 .chat-box{
-    height: 70vh;
-    width: 50vw;
+    /* height: 500px; */
+    width: 700px;
     border: 0.5px solid rgb(238, 230, 230);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* position: relative; */
 }
 .top{
     background: linear-gradient(#05BDCE,#5F4FE0,#5C3FEC);
+    /* position: absolute; */
+    /* top: 0; */
+    width: 100%;
 }
 
 
 .chatbox{
    height: 350px !important;
    width: 100%;
+
 }
 .box{
     display: inline-block !important;
@@ -27,4 +35,18 @@
 }
 .icon:hover{
 margin-left: 20px;
+}
+
+@media screen and (max-width: 700px) {
+    .chat-box{
+        width: 500px;
+        /* height: 100vw; */
+    }
+}
+@media screen and (max-width: 640px) {
+    .chat-box{
+        width: 100vw;
+        margin-bottom: 100px;
+        /* height: 80vh; */
+    }
 }
