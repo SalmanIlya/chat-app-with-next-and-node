@@ -8,10 +8,10 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <div className="home h-screen flex flex-col justify-center items-center">
+      <div className="home flex flex-row justify-center items-center h-screen sm:flex sm:flex-col sm:items-center sm:justify-center  lg:flex lg:flex-col lg:justify-center lg:items-center xl:flex xl:flex-col xl:justify-center xl:items-center 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center  md:flex md:flex-col md:justify-center md:items-center">
         {!user.UserName ? (
           <div>
-            <div className="flex flex-col justify-center items-center">
+            <div className=" h-screen flex flex-col justify-center items-center">
               <h1 className=" text-2xl">
                 Please Login First or Create Account
               </h1>
